@@ -9,25 +9,26 @@ namespace WebFarmacia.Web.Data.Entities
     public class Owner
     {
         public int Id { get; set; }//codigo del proietario
-        [Required]
-        [MaxLength(30)]
+        [Required(ErrorMessage ="The field {0} is mandatory.")]
+        [MaxLength(30, ErrorMessage = "The {0} field  can not have more than {1} charactrs. ")]
         public string Document { get; set; }
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
+        [MaxLength(50, ErrorMessage = "The {0} field  can not have more than {1} charactrs. ")]
         [Display(Name = "First Name")]
         public string FirstName { get; set;}
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
+        [MaxLength(50, ErrorMessage = "The {0} field  can not have more than {1} charactrs. ")]
         [Display(Name = "Last Name")]
         public string  LastName { get; set; }
-        [MaxLength(20)]
+        [MaxLength(20,ErrorMessage = "The {0} field  can not have more than {1} charactrs. ")]
         [Display(Name = "Fixed Phone")]
         public string FixedPhone { get; set; }
-        [Required]
-        [MaxLength(20)]
+        [Required(ErrorMessage = "The field {0} is mandatory.")]
+        [MaxLength(20, ErrorMessage = "The {0} field  can not have more than {1} charactrs. ")]
         [Display(Name = "Cell Phone")]
+
         public string CellPhone  { get; set; }
-        [MaxLength(100)]
+        [MaxLength(100, ErrorMessage = "The {0} field  can not have more than {1} charactrs. ")]
         public string  Address{ get; set; }
 
         //propiedades de lectura nombre y apellidos
