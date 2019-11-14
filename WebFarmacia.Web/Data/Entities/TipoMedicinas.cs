@@ -13,6 +13,9 @@ namespace WebFarmacia.Web.Data.Entities
         [MaxLength(50, ErrorMessage = "The {0} field  can not have more than {1} charactrs. ")]
         [Display(Name = "Name")]
         public string Name { get; set; }
-        
+
+        // relacionando la tabla tipo con medicinas
+        public ICollection<Medicinas> Medicinas { get; set; }
+
     }
 }

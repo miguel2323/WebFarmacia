@@ -49,11 +49,12 @@ namespace WebFarmacia.Web.Data.Entities
         public DateTime PublicacionLocal => Publicacion.ToLocalTime();
 
 
+        // creando la relasion entre la tabla tipo y la tabla medicina
+        public TipoMedicinas TipoMedicinas { get; set; }
 
+        // Creando la relacion owner con la tabla  medicina
 
-
-
-
+        public Owner Owner { get; set; }
 
 
 

@@ -38,5 +38,11 @@ namespace WebFarmacia.Web.Data.Entities
         public string FullNameWithDocument => $"{FirstName}{LastName} - {Document}";
 
 
+
+        //relacionando la tabla owner con la tabla medicinas
+
+        public ICollection<Medicinas> Medicinas { get; set; }
+
+
     }
 }

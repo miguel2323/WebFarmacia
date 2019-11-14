@@ -15,8 +15,18 @@ namespace WebFarmacia.Web.Data
         {
 
         }
-        //maiando mi modelo Owner
+        // matriculando mis tablas
         public DbSet<Owner> Owners { get; set; }
+
+        public DbSet<Medicinas> Medicinas{ get; set; }
+
+
+        public DbSet<TipoMedicinas> TipoMedicinas  { get; set; }
+
+
+
+
+
 
     }
 
