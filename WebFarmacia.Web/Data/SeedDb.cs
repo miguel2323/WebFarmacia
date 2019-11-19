@@ -20,8 +20,6 @@ namespace WebFarmacia.Web.Data
             _context = context;
         }
 
-
-
         //metodo para alimentar la base de datos
         //este metdo es asincrono
 
@@ -47,7 +45,6 @@ namespace WebFarmacia.Web.Data
             }
         }
 
-
         //agragando propietario o farmacia
         private async Task CheckOwnerAsync()
         {
@@ -71,9 +68,6 @@ namespace WebFarmacia.Web.Data
                 CellPhone = cellPhone,
                 Address=address
             }); 
-
-
-            
 
         }
 

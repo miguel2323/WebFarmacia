@@ -15,7 +15,7 @@ namespace WebFarmacia.Web.Data.Entities
         public string Name { get; set; }
 
         // relacionando la tabla tipo con medicinas
-        public ICollection<Medicinas> Medicinas { get; set; }
+        public ICollection<Medicinas> Medicinas{ get; set; }
 
     }
 }
