@@ -31,7 +31,7 @@ namespace WebFarmacia.Web.Data.Entities
 
 
         [Display(Name = "Disponible?")]
-        public string IsAvailabe{ get; set; }
+        public bool IsAvailabe{ get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
         public double stock { get; set; }

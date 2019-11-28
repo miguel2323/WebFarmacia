@@ -33,6 +33,9 @@ namespace WebFarmacia.Web
 
             });
 
+            //alimentando la base de datos
+            services.AddTransient<SeedDb>();
+
 
 
             services.Configure<CookiePolicyOptions>(options =>
