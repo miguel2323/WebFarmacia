@@ -12,29 +12,28 @@ namespace WebFarmacia.Web.Controllers
 {
     public class MedicinasController : Controller
     {
-        private readonly DataContext _context;
+        private readonly IRepository repository;
 
-        public MedicinasController(DataContext context)
+        public MedicinasController(IRepository repository)
         {
-            _context = context;
+            this.repository = repository;
         }
 
         // GET: Medicinas
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Medicinas.ToListAsync());
+            return View(this.repository.GetMedicinas());
         }
 
         // GET: Medicinas/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var medicina = await _context.Medicinas
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var medicina = this.repository.GetMedicina(id.Value);
             if (medicina == null)
             {
                 return NotFound();
@@ -49,31 +48,29 @@ namespace WebFarmacia.Web.Controllers
             return View();
         }
 
-        // POST: Medicinas/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Medicinas/Create.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Price,ImageUrl,LastPurchase,LastSale,IsAvailabe,stock")] Medicina medicina)
+        public async Task<IActionResult> Create( Medicina medicina)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(medicina);
-                await _context.SaveChangesAsync();
+                this.repository.AddMedicina(medicina);
+                await this.repository.SaveAllAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(medicina);
         }
 
         // GET: Medicinas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var medicina = await _context.Medicinas.FindAsync(id);
+            var medicina =this.repository.GetMedicina(id.Value) ;
             if (medicina == null)
             {
                 return NotFound();
@@ -82,27 +79,22 @@ namespace WebFarmacia.Web.Controllers
         }
 
         // POST: Medicinas/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Price,ImageUrl,LastPurchase,LastSale,IsAvailabe,stock")] Medicina medicina)
+        public async Task< IActionResult> Edit( Medicina medicina)
         {
-            if (id != medicina.Id)
-            {
-                return NotFound();
-            }
-
+            
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(medicina);
-                    await _context.SaveChangesAsync();
+                    this.repository.UpdateMedicina(medicina);
+                    await this.repository.SaveAllAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MedicinaExists(medicina.Id))
+                    if (!this.repository.MedicinaExists(medicina.Id))
                     {
                         return NotFound();
                     }
@@ -117,15 +109,14 @@ namespace WebFarmacia.Web.Controllers
         }
 
         // GET: Medicinas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var medicina = await _context.Medicinas
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var medicina = this.repository.GetMedicina(id.Value );
             if (medicina == null)
             {
                 return NotFound();
@@ -139,15 +130,11 @@ namespace WebFarmacia.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var medicina = await _context.Medicinas.FindAsync(id);
-            _context.Medicinas.Remove(medicina);
-            await _context.SaveChangesAsync();
+            var medicina = this.repository.GetMedicina(id);
+            this.repository.RemoveMedicina(medicina);
+            await this.repository.SaveAllAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MedicinaExists(int id)
-        {
-            return _context.Medicinas.Any(e => e.Id == id);
-        }
     }
 }
