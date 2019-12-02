@@ -1,13 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebFarmacia.Web.Data.Entities;
-
+﻿
 namespace WebFarmacia.Web.Data
 {
-    public class DataContext : DbContext
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using WebFarmacia.Web.Data.Entities;
+
+    public class DataContext : IdentityDbContext<User>
     {
 
         //base de datos que se basa en el datacontext

@@ -37,6 +37,7 @@ namespace WebFarmacia.Web.Data.Entities
         public double stock { get; set; }
 
 
+        public User User { get; set; }
 
     }
 }
