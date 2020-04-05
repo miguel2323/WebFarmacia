@@ -20,6 +20,7 @@ namespace WebFarmacia.Web.Controllers
         }
 
         // GET: Medicinas
+        //muesta la lista de medicina o pinta
         public IActionResult Index()
         {
             return View(this.repository.GetMedicinas());
@@ -69,7 +70,6 @@ namespace WebFarmacia.Web.Controllers
             {
                 return NotFound();
             }
-
             var medicina =this.repository.GetMedicina(id.Value) ;
             if (medicina == null)
             {

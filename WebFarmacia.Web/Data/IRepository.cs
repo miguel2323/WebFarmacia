@@ -1,9 +1,9 @@
 ﻿
 namespace WebFarmacia.Web.Data
 {
+    using Entities;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Entities;
 
     public interface IRepository
     {

@@ -1,10 +1,10 @@
 ﻿
-
 namespace WebFarmacia.Web.Data
-{using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Entities;
+{
+    using Entities;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     public class Repository : IRepository
     {
         private readonly DataContext context;
@@ -25,7 +25,7 @@ using Entities;
 
         public Medicina GetMedicina(int id)
         {
-            return this.context.Medicinas.Find(id);
+            return this.context.Medicinas.Find(id);//buaqueda por clave primaria
 
         }
 
@@ -48,13 +48,13 @@ using Entities;
             this.context.Medicinas.Remove(medicina);
         }
 
-
+        //grABAR TODOS LOS Cambios
         public async Task<bool> SaveAllAsync()
         {
             return await this.context.SaveChangesAsync() > 0;
 
         }
-
+        // si la madicina existe manda verdadero sino mnda falso
         public bool MedicinaExists(int id)
         {
             return this.context.Medicinas.Any(m => m.Id == id);
