@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
+
+namespace WebFarmacia.Web
+{
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using WebFarmacia.Web.Data;
+using Data;
+using Data.Entities;
+using Helpers;
 
-namespace WebFarmacia.Web
-{
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -37,6 +36,8 @@ namespace WebFarmacia.Web
             services.AddTransient<SeedDb>();
 
             services.AddScoped<IRepository, Repository>();
+
+            services.AddScoped<IuserHelpers, UserHelper>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
