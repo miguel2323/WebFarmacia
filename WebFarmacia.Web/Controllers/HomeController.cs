@@ -5,14 +5,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebFarmacia.Web.Models;
+using WebFarmacia.Web.Data;
+using WebFarmacia.Web.Data.Entities;
 
 namespace WebFarmacia.Web.Controllers
 {
     public class HomeController : Controller
     {
+
+
+        private readonly IRepository repository;
+
+        public HomeController(IRepository repository)
+        {
+            this.repository = repository;
+        }
         public IActionResult Index()
         {
-            return View();
+            return View(this.repository.GetMedicinas());
         }
 
         public IActionResult About()
