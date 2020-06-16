@@ -18,10 +18,10 @@ namespace WebFarmacia.Web.Data
         private readonly UserManager<User> userManager;
         private Random random;
 
-        public SeedDb(DataContext context, UserManager<User> userManage)
+        public SeedDb(DataContext context, UserManager<User>userManager)
         {
             this.context=context;
-            this.userManager = userManager;
+            this.userManager= userManager;
             this.random = new Random();
         }
 
