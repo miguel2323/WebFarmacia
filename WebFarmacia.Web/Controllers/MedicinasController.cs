@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebFarmacia.Web.Data;
 using WebFarmacia.Web.Data.Entities;
-
+using WebFarmacia.Web.Models;
 namespace WebFarmacia.Web.Controllers
 {
     public class MedicinasController : Controller
@@ -52,15 +53,53 @@ namespace WebFarmacia.Web.Controllers
         // POST: Medicinas/Create.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Medicina medicina)
+        public async Task<IActionResult> Create(MadicinaViewModel view)
         {
             if (ModelState.IsValid)
             {
-                this.repository.AddMedicina(medicina);
+                var path = string.Empty;
+
+               if(view.ImageFile !=null &&view.ImageFile.Length>0)
+                {
+
+                    path = Path.Combine(
+                        Directory.GetCurrentDirectory(), 
+                        "wwwroot\\ima\\Product",
+                        view.ImageFile.FileName);
+
+                    using(var stream=new FileStream(path,FileMode.Create))
+                    {
+                        await view.ImageFile.CopyToAsync(stream);
+                    }
+
+                    path = $"/ima/Product/{view.ImageFile.FileName}";
+                }
+                 
+                
+                var product = this.ToProduct(view, path);
+
+                this.repository.AddMedicina(product);
                 await this.repository.SaveAllAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(medicina);
+            return View(view);
+        }
+
+        private Medicina ToProduct(MadicinaViewModel view, string path)
+        {
+            return new Medicina
+            {
+                Id = view.Id,
+                ImageUrl = path,
+                IsAvailabe = view.IsAvailabe,
+               LastPurchase=view.LastPurchase,
+               LastSale= view.LastSale,
+               Name =view.Name,
+               Price= view.Price,
+               stock= view.stock,
+               User=view.User
+            
+            };
         }
 
         // GET: Medicinas/Edit/5
@@ -75,26 +114,69 @@ namespace WebFarmacia.Web.Controllers
             {
                 return NotFound();
             }
-            return View(medicina);
+
+            var view = this.ToMedicinaViewModel(medicina);
+            return View(view);
+        }
+
+        private MadicinaViewModel ToMedicinaViewModel(Medicina medicina)
+        {
+           return new  MadicinaViewModel
+
+                {
+                Id = medicina.Id,
+              
+               IsAvailabe = medicina.IsAvailabe,
+               LastPurchase = medicina.LastPurchase,
+               ImageUrl=medicina.ImageUrl,
+               LastSale = medicina.LastSale,
+               Name = medicina.Name,
+               Price = medicina.Price,
+               stock = medicina.stock,
+               User = medicina.User
+
+
+            };
         }
 
         // POST: Medicinas/Edit/5
-      
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task< IActionResult> Edit( Medicina medicina)
+        public async Task< IActionResult> Edit(MadicinaViewModel view)
         {
             
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var path = view.ImageUrl;
+                    if (view.ImageFile != null && view.ImageFile.Length > 0)
+                    {
+
+                        path = Path.Combine(
+                            Directory.GetCurrentDirectory(),
+                            "wwwroot\\ima\\Product",
+                            view.ImageFile.FileName);
+
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await view.ImageFile.CopyToAsync(stream);
+                        }
+
+                        path = $"/ima/Product/{view.ImageFile.FileName}";
+                    }
+
+
+
+                    var medicina = this.ToProduct(view, path);
+
                     this.repository.UpdateMedicina(medicina);
                     await this.repository.SaveAllAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.repository.MedicinaExists(medicina.Id))
+                    if (!this.repository.MedicinaExists(view.Id))
                     {
                         return NotFound();
                     }
@@ -105,7 +187,7 @@ namespace WebFarmacia.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(medicina);
+            return View(view);
         }
 
         // GET: Medicinas/Delete/5

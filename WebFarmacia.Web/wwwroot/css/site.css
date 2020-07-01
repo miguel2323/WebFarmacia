@@ -8,21 +8,31 @@ body {
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
+    padding-left: 0px;
     padding-right: 15px;
 }
 
-/* Carousel */
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
+} 
+.carousel-inner img {
+    padding-top: 60px;
+    padding-bottom: 0;
+}
+.navbar {
+    padding-top: 60px;
+    min-height: 33px;
+    margin-bottom: 0;
+    border-radius: 0;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
+
+
+Make .svg files in the carousel display properly in older browsers
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
-
 /* QR code generator */
 #qrCode {
     margin: 15px;
