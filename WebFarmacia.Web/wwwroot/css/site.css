@@ -1,22 +1,21 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
-body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
+
+/*       
 .body-content {
     padding-left: 0px;
     padding-right: 15px;
 }
+*/
 
-.carousel-caption p {
+.mycarousel-caption p {
     font-size: 20px;
     line-height: 1.4;
-} 
-.carousel-inner img {
+}
+.mycarousel-inner img {
     padding-top: 60px;
     padding-bottom: 0;
 }
@@ -26,22 +25,85 @@ body {
     margin-bottom: 0;
     border-radius: 0;
 }
-
-
-
-Make .svg files in the carousel display properly in older browsers
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
     .carousel-caption {
         display: none;
     }
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+   background-color:cornflowerblue;
+}
+/* efecto en las imagenes 
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+    */
+
+/* efecto en las imagenes */
+#effect-hover .img {
+    background-image: url(http://noticias.universia.cl/net/images/educacion/c/cu/cur/cursos-online-gratuitos-programar-java.jpg);
+    width: 400px;
+    height: 300px;
+    background-size: cover;
+    margin: 20px auto;
+}
+
+#effect-hover #efecto {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  background-color: chartreuse;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+#effect-hover .img:hover #efecto {
+    opacity: 1;
+}
+
+#effect-hover h2 {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: 30px;
+    transition-duration: 2s
+}
+
+#effect-hover .img:hover h2 {
+    top: 15px;
+}
+
+#effect-hover p {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 30px;
+    transition-duration: 2s
+}
+
+#effect-hover .img:hover p {
+    bottom: 50px;
+}
+
+
+#contenedor{
+    text-align:center;
+}
+.imga1 {
+    background-image: url(http://cdn2.hubspot.net/hubfs/763617/images/img-left.png?t=1466090614807);
+    padding: 5px 10px 5px 10px;
+    margin: 2px;
+    display: inline-block;
+    width: 200px;
+    text-align: center;
 }
