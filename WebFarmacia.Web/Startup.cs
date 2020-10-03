@@ -40,8 +40,8 @@ using Microsoft.Extensions.DependencyInjection;
             services.AddDbContext<DataContext>( cfg=>
 
                 {
-                   cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
-
+                    //  cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
+                    object p = cfg.UseSqlite(this.Configuration.GetConnectionString("SqliteDefault"));
             });
 
             //alimentando la base de datos
