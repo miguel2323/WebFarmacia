@@ -64,8 +64,7 @@ namespace WebFarmacia.Web.Controllers
 
                     path = Path.Combine(
                         Directory.GetCurrentDirectory(), 
-                        "wwwroot\\ima\\Product",
-                        view.ImageFile.FileName);
+                        "wwwroot//ima//Product",view.ImageFile.FileName);
 
                     using(var stream=new FileStream(path,FileMode.Create))
                     {

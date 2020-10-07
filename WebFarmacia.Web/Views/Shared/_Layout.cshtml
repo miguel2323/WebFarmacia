@@ -6,9 +6,10 @@
     <title>@ViewData["Title"] - WebFarmacia.Web</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /> 
+     <!--   <link rel="stylesheet" href="~/css/site.css" />--> 
     </environment>
+
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -35,6 +36,19 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                     <li><a asp-area="" asp-controller="Medicinas" asp-action="Index">Medicina</a></li>
                 </ul>
+             <ul  class="nav navbar-nav navbar-right">
+                   @if (this.User.Identity.IsAuthenticated)
+                   {
+                    <li><a asp-area="" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                       
+                   }
+                   else{
+                       <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                       
+                   }
+             </ul>
+
             </div>
         </div>
     </nav>

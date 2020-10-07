@@ -47,8 +47,6 @@ namespace WebFarmacia.Web.Data
                     PhoneNumber="04266828897"
 
                 };
-
-
                 var resul = await this.userManager.CreateAsync(user, "123456");
                 if (resul !=IdentityResult.Success)
                 {
