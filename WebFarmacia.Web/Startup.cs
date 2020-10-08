@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-    using WebFarmacia.Web.Data;
-    using WebFarmacia.Web.Data.Entities;
+    using Microsoft.Extensions.DependencyInjection;
+    using Data;
+    using Data.Entities;
+    using Helpers;
 
     public class Startup
     {
@@ -48,6 +49,10 @@ using Microsoft.Extensions.DependencyInjection;
             services.AddTransient<SeedDb>();
 
             services.AddScoped<IRepository, Repository>();
+
+           services.AddScoped<IUserHelper, UserHelper>();
+
+
 
             services.Configure<CookiePolicyOptions>(options =>
             {
