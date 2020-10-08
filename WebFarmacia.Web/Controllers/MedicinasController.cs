@@ -80,7 +80,7 @@ using Helpers;
                 
                 var product = this.ToProduct(view, path);
                 
-                view.User=await this.userHelper.GetUserByEmailAsync("miguelrojas8143@gmail.com");
+                product.User=await this.userHelper.GetUserByEmailAsync("miguelrojas8143@gmail.com");
                 this.repository.AddMedicina(product);
                 await this.repository.SaveAllAsync();
                 return RedirectToAction(nameof(Index));
