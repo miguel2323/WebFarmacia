@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+namespace WebFarmacia.Web.Controllers
+{using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,18 +8,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using WebFarmacia.Web.Data;
-using WebFarmacia.Web.Data.Entities;
-using WebFarmacia.Web.Models;
-namespace WebFarmacia.Web.Controllers
-{
+using Data;
+using Data.Entities;
+using Models;
+using Helpers;
     public class MedicinasController : Controller
     {
         private readonly IRepository repository;
-
-        public MedicinasController(IRepository repository)
+        private readonly IUserHelper userHelper;
+        public MedicinasController(IRepository repository,IUserHelper userHelper)
         {
             this.repository = repository;
+            this.userHelper=userHelper;
         }
 
         // GET: Medicinas
@@ -57,6 +59,7 @@ namespace WebFarmacia.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 var path = string.Empty;
 
                if(view.ImageFile !=null &&view.ImageFile.Length>0)
@@ -76,7 +79,8 @@ namespace WebFarmacia.Web.Controllers
                  
                 
                 var product = this.ToProduct(view, path);
-
+                
+                view.User=await this.userHelper.GetUserByEmailAsync("miguelrojas8143@gmail.com");
                 this.repository.AddMedicina(product);
                 await this.repository.SaveAllAsync();
                 return RedirectToAction(nameof(Index));
