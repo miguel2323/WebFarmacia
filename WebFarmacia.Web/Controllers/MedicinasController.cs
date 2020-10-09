@@ -12,6 +12,9 @@ using Data;
 using Data.Entities;
 using Models;
 using Helpers;
+    using Microsoft.AspNetCore.Authorization;
+
+    [Authorize]
     public class MedicinasController : Controller
     {
         private readonly IRepository repository;
@@ -167,7 +170,7 @@ using Helpers;
                             await view.ImageFile.CopyToAsync(stream);
                         }
 
-                        path = $"/ima/Product/{view.ImageFile.FileName}";
+                        path = $"~/ima/Product/{view.ImageFile.FileName}";
                     }
 
 

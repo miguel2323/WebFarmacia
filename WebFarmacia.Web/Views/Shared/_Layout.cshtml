@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebFarmacia.Web</title>
-
+    <title>@ViewData["Title"]-WebFarmacia.Web</title>
+    
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /> 
      <!--   <link rel="stylesheet" href="~/css/site.css" />--> 
@@ -36,7 +36,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                     <li><a asp-area="" asp-controller="Medicinas" asp-action="Index">Medicina</a></li>
                 </ul>
-             <ul  class="nav navbar-nav navbar-right">
+             <ul class="nav navbar-nav navbar-right">
                    @if (this.User.Identity.IsAuthenticated)
                    {
                     <li><a asp-area="" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a></li>
@@ -52,8 +52,7 @@
             </div>
         </div>
     </nav>
-
-    <partial name="_CookieConsentPartial" />
+ <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
         @RenderBody()
