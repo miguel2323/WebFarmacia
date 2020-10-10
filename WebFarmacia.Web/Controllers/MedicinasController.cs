@@ -74,14 +74,12 @@ using Helpers;
                 {
                  await view.ImageFile.CopyToAsync(stream);
                 }
-                    path = $"~/ima/Product/{view.ImageFile.FileName}";
+                    path = $"/ima/Product/{view.ImageFile.FileName}";
                 }
                 var product = this.ToProduct(view, path);
-               
-                //TODO:hacer user logueado
                 product.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
-                //this.repository.AddMedicina(product);
-                //await this.repository.SaveAllAsync();
+                this.repository.AddMedicina(product);
+                await this.repository.SaveAllAsync();
                 return RedirectToAction(nameof(Index));
             }
                return View(view);
@@ -149,27 +147,34 @@ using Helpers;
             {
                 try
                 {
-                    var path = view.ImageUrl;
+                var path = view.ImageUrl;
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
 
                         path = Path.Combine(
                             Directory.GetCurrentDirectory(),
-                            "wwwroot\\ima\\Product",
+                            "wwwroot//ima//Product",
                             view.ImageFile.FileName);
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
-                            await view.ImageFile.CopyToAsync(stream);
+                         await view.ImageFile.CopyToAsync(stream);
                         }
-                        path = $"~/ima/Product/{view.ImageFile.FileName}";
+                        path = $"/ima/Product/{view.ImageFile.FileName}";
                     }
 
-                   var medicina = this.ToProduct(view, path);
-                   
+                var product = this.ToProduct(view, path);
+                product.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                this.repository.UpdateMedicina(product);
+                await this.repository.SaveAllAsync();
+                //return RedirectToAction(nameof(Index));
+
+                 /*  var medicina = this.ToProduct(view, path);
                    medicina.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     this.repository.UpdateMedicina(medicina);
                     await this.repository.SaveAllAsync();
+                    */
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {

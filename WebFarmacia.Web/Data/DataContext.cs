@@ -17,6 +17,8 @@ namespace WebFarmacia.Web.Data
     
         public DbSet<Medicina> Medicinas { get; set; }
 
+         public DbSet<Country> Countries{get;set;}
+       
 // modificando los decimales de los precios
  protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
