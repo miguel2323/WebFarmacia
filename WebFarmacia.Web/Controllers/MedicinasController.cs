@@ -62,33 +62,29 @@ using Helpers;
         {
             if (ModelState.IsValid)
             {
-                
                 var path = string.Empty;
-
-               if(view.ImageFile !=null &&view.ImageFile.Length>0)
+                if(view.ImageFile !=null &&view.ImageFile.Length>0)
                 {
-
-                    path = Path.Combine(
+                 path = Path.Combine(
                         Directory.GetCurrentDirectory(), 
-                        "wwwroot//ima//Product",view.ImageFile.FileName);
+                "wwwroot//ima//Product",view.ImageFile.FileName);
+                      // "wwwroot//ima//Product",file);
 
-                    using(var stream=new FileStream(path,FileMode.Create))
-                    {
-                        await view.ImageFile.CopyToAsync(stream);
-                    }
-
-                    path = $"/ima/Product/{view.ImageFile.FileName}";
+                using(var stream=new FileStream(path,FileMode.Create))
+                {
+                 await view.ImageFile.CopyToAsync(stream);
                 }
-                 
-                
+                    path = $"~/ima/Product/{view.ImageFile.FileName}";
+                }
                 var product = this.ToProduct(view, path);
-                
-                product.User=await this.userHelper.GetUserByEmailAsync("miguelrojas8143@gmail.com");
-                this.repository.AddMedicina(product);
-                await this.repository.SaveAllAsync();
+               
+                //TODO:hacer user logueado
+                product.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                //this.repository.AddMedicina(product);
+                //await this.repository.SaveAllAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(view);
+               return View(view);
         }
 
         private Medicina ToProduct(MadicinaViewModel view, string path)
@@ -140,8 +136,6 @@ using Helpers;
                Price = medicina.Price,
                stock = medicina.stock,
                User = medicina.User
-
-
             };
         }
 
@@ -151,7 +145,6 @@ using Helpers;
         [ValidateAntiForgeryToken]
         public async Task< IActionResult> Edit(MadicinaViewModel view)
         {
-            
             if (ModelState.IsValid)
             {
                 try
@@ -169,14 +162,12 @@ using Helpers;
                         {
                             await view.ImageFile.CopyToAsync(stream);
                         }
-
                         path = $"~/ima/Product/{view.ImageFile.FileName}";
                     }
 
-
-
-                    var medicina = this.ToProduct(view, path);
-
+                   var medicina = this.ToProduct(view, path);
+                   
+                   medicina.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     this.repository.UpdateMedicina(medicina);
                     await this.repository.SaveAllAsync();
                 }

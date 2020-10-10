@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 namespace WebFarmacia.Web.Data.Entities
 {
-    public class Medicina
+    public class Medicina:IEntity
     {
         public int Id { get; set; }
 
