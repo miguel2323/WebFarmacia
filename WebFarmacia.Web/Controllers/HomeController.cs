@@ -14,15 +14,15 @@ namespace WebFarmacia.Web.Controllers
     {
 
 
-        private readonly IRepository repository;
+        private readonly IProductRepository repository;
 
-        public HomeController(IRepository repository)
+        public HomeController(IProductRepository repository)
         {
             this.repository = repository;
         }
         public IActionResult Index()
         {
-            return View(this.repository.GetMedicinas());
+            return View(this.repository.GetAll());
         }
 
         public IActionResult About()

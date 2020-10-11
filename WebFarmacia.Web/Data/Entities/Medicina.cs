@@ -19,25 +19,21 @@ namespace WebFarmacia.Web.Data.Entities
         [Display(Name ="Imagen")]
         public string ImageUrl { get; set; }
 
-
         [Display(Name = "Ultima Compra")]
         public DateTime? LastPurchase{ get; set; }
 
-
-
         [Display(Name = "Ultima venta")]//ultima venta
         public DateTime? LastSale { get; set; }
-
-
 
         [Display(Name = "Disponible?")]
         public bool IsAvailabe{ get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
         public double stock { get; set; }
+      public User User { get; set; }
 
-
-        public User User { get; set; }
+       [Display(Name ="Imagen")]
+        public string ImageFullPath { get;}
 
     }
 }
