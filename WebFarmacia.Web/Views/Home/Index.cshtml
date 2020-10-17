@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<WebFarmacia.Web.Data.Entities.Medicina>
+﻿@model IEnumerable<WebFarmacia.Web.Data.Entities.Medicina>
 
 @{ ViewData["Title"] = "Home Page";
 }
@@ -7,15 +6,6 @@
 
 <link href="stylesheet" type="text/css" media="screen" rel="/css/site.css" />
 <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
-<!--
-
-
-<link href="/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/css/site.min.css" rel="stylesheet" />
-<link href="/css/bootstrap.min.css" rel="stylesheet" />
-
-<script src="/js/bootstrap.min.js"></script>
--->
 <!--colacando el carrusel-->
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
@@ -46,30 +36,104 @@
         </a>
     </div>
 </div>
-<!--cerrando el carrusel 
+@{
+    var total=0;
+     foreach(var m in Model)
+     {
+         total=total+1;
+     }
 
-<div class="row ">
-    <div class="col"> </div>
-   @foreach (var m in Model)
-                {
-                    <li data-target="#carousel2" data-slide-to="@m.Id">
-                    </li>
-                }
-                -->
-                <div class="item active">
-                    @foreach (var m in Model)
-                    {<div class="item">
-                            <h2>@m.Name</h2>
-                
-                 @if (!string.IsNullOrEmpty(@m.ImageUrl))
+     int filas=total/3;
+
+int contador=0;
+int contfilas=0;
+
+
+
+};
+
+<p>@total</p>
+<p>@filas</p>
+
+
+<table>
+    
+       
+        <tbody>
+             <tr>
+                <th>Col1</th>
+                <th>Col2</th>
+                <th>Col3</th>
+             </tr>
+
+            @for (; contador < total;  contador++) 
+{
+    @if((contador%3)==0)
+    {
+                    <tr>
+                <td width=200px>
+                    <h2>@Model.ElementAt(contador).Name</h2>
+                    @if (!string.IsNullOrEmpty(@Model.ElementAt(contador).ImageUrl))
                     {
-                    <img src="@Url.Content(m.ImageUrl)" alt="Ima" style="width:200px;
-                        height:200px;height:150px;max-width: 100%; height:auto" />
+                        <img src="@Url.Content(@Model.ElementAt(contador).ImageUrl)"alt="Ima"style="width:200px;
+                        height:200px;max-width:50%" />
+                    }
+                     <h4>@Model.ElementAt(contador).Price Bs</h4>
+                </td>
+                @if((contador+1)<=total-1){
+                    <td width=200px>
+                        <h2>@Model.ElementAt(contador+1).Name</h2>
+                        @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+1).ImageUrl))
+                    {
+                        <img src="@Url.Content(@Model.ElementAt(contador+1).ImageUrl)"alt="Ima"style="width:200px;
+                        height:200px;max-width:50%" />
+                    }
+                     <h4>@Model.ElementAt(contador+1).Price Bs</h4>
+                    </td>
+                }
+                @if((contador+2)<=total-1){
+                 <td width=200px>
+                   <h2>@Model.ElementAt(contador+2).Name</h2>
+                   @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+2).ImageUrl))
+                    {
+                        <img src="@Url.Content(@Model.ElementAt(contador+2).ImageUrl)"alt="Ima"style="width:200px;
+                        height:200px;max-width:50%" />
+                    }
+                     <h4>@Model.ElementAt(contador+2).Price Bs</h4>
+                </td>
+                }
+            </tr>
+    } 
+}
+            
+            
+        
+           
+        </tbody>
+   
+</table>
 
+
+
+
+<!--
+<div class="row ">
+    
+   
+            <div class="item active">
+             @foreach (var m in Model)
+                    {<div class="col-4"> 
+                        <div class="item">
+                            <h2>@m.Name</h2>
+            @if (!string.IsNullOrEmpty(@m.ImageUrl))
+                    {
+            <img src="@Url.Content(m.ImageUrl)"alt="Ima"style="width:200px;
+                        height:200px;max-width:50%" />
                     }
                      <h4>@m.Price Bs</h4>
                          <br>  
-                 </div>
+</div>                 </div>
                     }
                </div>
    
+-->
