@@ -8,8 +8,9 @@ namespace WebFarmacia.Web.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using System.IO;
-  using WebFarmacia.Web.Models;
-    public class MedicinasController : Controller
+    using WebFarmacia.Web.Models;
+    
+    public class MedicinasController:Controller
     {
         //private readonly IRepository repository;
 
@@ -27,12 +28,12 @@ namespace WebFarmacia.Web.Controllers
             return View(this.productRepository.GetAll());
         }
       // GET: Medicinas/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult>Details(int? id)
         {
             if (id == null)
             { return NotFound();
             }
-            var product = this.productRepository.GetByIdAsync(id.Value);
+            var product = await this.productRepository.GetByIdAsync(id.Value);
             if (product == null)
             {return NotFound();
             }
@@ -57,17 +58,16 @@ namespace WebFarmacia.Web.Controllers
                 if(view.ImageFile !=null &&view.ImageFile.Length>0)
                 {
                  path = Path.Combine(
-                        Directory.GetCurrentDirectory(), 
-                        "wwwroot//ima//Product",
-                        view.ImageFile.FileName);
-                    
-               using(var stream=new FileStream(path,FileMode.Create))
-                {
-                 await view.ImageFile.CopyToAsync(stream);
+                 Directory.GetCurrentDirectory(), 
+                "wwwroot//ima//Product",
+                view.ImageFile.FileName);
+                    using(var stream=new FileStream(path,FileMode.Create))
+                        {
+                        await view.ImageFile.CopyToAsync(stream);
+                        }
+                        path = $"~/ima/Product/{view.ImageFile.FileName}";
                 }
-                    path = $"~/ima/Product/{view.ImageFile.FileName}";
-                }
-               var product = this.ToProduct(view, path);
+                var product = this.ToProduct(view, path);
                 product.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.productRepository.CreateAsync(product);
                 return RedirectToAction(nameof(Index));
@@ -88,55 +88,41 @@ namespace WebFarmacia.Web.Controllers
               Price= view.Price,
                stock= view.stock,
                User=view.User
-            
-            };
+              };
         }
-  
-        // GET: Medicinas/Edit/5
-        public IActionResult Edit(int? id)
+    // GET: Medicinas/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var product =this.productRepository.GetByIdAsync(id.Value);
+            var product = await this.productRepository.GetByIdAsync(id.Value);
             if (product == null)
             {
                 return NotFound();
           }
-        //  var view =this.ToMedicinaViewModel(product);
-
-        var view = new MadicinaViewModel
-        {   Id=product.Id,
-            IsAvailabe = product.IsAvailable,
-            LastPurchase = product.LastPurchase,
-               ImageUrl=product.ImageUrl,
-              LastSale = product.LastSale,
-               Name = product.Name,
-               Price = product.Price,
-               stock = product.stock,
-               User = product.User
-            
-        };
- 
-            return View(view);
+          var view = this.ToMedicinaViewModel(product);
+          return View(view);
         }
-
-       private MadicinaViewModel ToMedicinaViewModel(Medicina product)
+     private  MadicinaViewModel ToMedicinaViewModel(Medicina product)
         {
+         
            return new MadicinaViewModel
                {
                 Id = product.Id,
-               IsAvailabe = product.IsAvailabe,
-               LastPurchase = product.LastPurchase,
-               ImageUrl=product.ImageUrl,
-               LastSale = product.LastSale,
-               Name = product.Name,
-               Price = product.Price,
-               stock = product.stock,
-               User = product.User
+                IsAvailabe = product.IsAvailabe,
+                LastPurchase = product.LastPurchase,
+                ImageUrl=product.ImageUrl,
+                LastSale = product.LastSale,
+                Name = product.Name,
+                Price = product.Price,
+                stock = product.stock,
+                User = product.User
               };
         }
+
+      
        /*  */
 
         // POST: Medicinas/Edit/5
@@ -153,8 +139,7 @@ namespace WebFarmacia.Web.Controllers
                     
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
-
-                           path = Path.Combine(
+                         path = Path.Combine(
                             Directory.GetCurrentDirectory(),
                             "wwwroot//ima//Product",
                             view.ImageFile.FileName);
@@ -168,7 +153,7 @@ namespace WebFarmacia.Web.Controllers
                     var product = this.ToProduct(view, path);
                    product.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                    await this.productRepository.UpdateAsync(product);
-                    //await this.productRepository.SaveAllAsync();
+                   //await this.productRepository.SaveAllAsync();
                  } catch (DbUpdateConcurrencyException)
                 {
                     if (!await this.productRepository.ExistAsync(view.Id))
@@ -183,23 +168,20 @@ namespace WebFarmacia.Web.Controllers
             }        
             return View(view);
         }
-               
-        // GET: Medicinas/Delete/5
-
+         // GET: Medicinas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var product = await this.productRepository.GetByIdAsync(id.Value );
-            if (product == null)
-            {
+             var product = await this.productRepository.GetByIdAsync(id.Value );
+             if (product == null)
+             {
                 return NotFound();
-            }
+             }
 
-            return View(product);
+             return View(product);
         }
 
         // POST: Medicinas/Delete/5
