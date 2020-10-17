@@ -1,9 +1,10 @@
 namespace WebFarmacia.Web.Data
 {  
     using Entities;
-
-    public interface IProductRepository:IGenericRepository<Medicina>{
-
+    using System.Linq;
+    public interface IProductRepository:IGenericRepository<Medicina>
+    {
+     IQueryable GetAllWithUsers();
         
     }
 

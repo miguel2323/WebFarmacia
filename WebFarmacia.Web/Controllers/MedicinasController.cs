@@ -9,7 +9,8 @@ namespace WebFarmacia.Web.Controllers
     using Microsoft.EntityFrameworkCore;
     using System.IO;
     using WebFarmacia.Web.Models;
-    
+    using System.Linq;
+
     public class MedicinasController:Controller
     {
         //private readonly IRepository repository;
@@ -25,7 +26,7 @@ namespace WebFarmacia.Web.Controllers
         // GET: Medicinas
          public IActionResult Index()
         {
-            return View(this.productRepository.GetAll());
+            return View(this.productRepository.GetAll().OrderBy(p=>p.Name.ToUpper()));
         }
       // GET: Medicinas/Details/5
         public async Task<IActionResult>Details(int? id)
@@ -122,11 +123,7 @@ namespace WebFarmacia.Web.Controllers
               };
         }
 
-      
-       /*  */
-
         // POST: Medicinas/Edit/5
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task< IActionResult> Edit(MadicinaViewModel view)
@@ -136,14 +133,12 @@ namespace WebFarmacia.Web.Controllers
             try
                 {
                  var path = view.ImageUrl;
-                    
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
                          path = Path.Combine(
                             Directory.GetCurrentDirectory(),
                             "wwwroot//ima//Product",
                             view.ImageFile.FileName);
-
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                          await view.ImageFile.CopyToAsync(stream);

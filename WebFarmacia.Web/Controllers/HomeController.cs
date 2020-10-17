@@ -22,7 +22,7 @@ namespace WebFarmacia.Web.Controllers
         }
         public IActionResult Index()
         {
-            return View(this.repository.GetAll());
+            return View(this.repository.GetAll().OrderBy(p=>p.Name.ToUpper()));
         }
 
         public IActionResult About()
