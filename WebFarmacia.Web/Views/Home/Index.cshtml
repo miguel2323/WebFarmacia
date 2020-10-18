@@ -44,54 +44,46 @@
      }
 
      int filas=total/3;
-
-int contador=0;
-int contfilas=0;
-
-
-
+  int contador=0;
+//int contfilas=0;
 };
-
-<p>@total</p>
-<p>@filas</p>
-
-
-<table>
-    
-       
-        <tbody>
-             <tr>
-                <th>Col1</th>
-                <th>Col2</th>
-                <th>Col3</th>
-             </tr>
-
-            @for (; contador < total;  contador++) 
-{
-    @if((contador%3)==0)
-    {
-                    <tr>
-                <td width=200px>
-                    <h2>@Model.ElementAt(contador).Name</h2>
-                    @if (!string.IsNullOrEmpty(@Model.ElementAt(contador).ImageUrl))
-                    {
-                        <img src="@Url.Content(@Model.ElementAt(contador).ImageUrl)"alt="Ima"style="width:200px;
-                        height:200px;max-width:50%" />
-                    }
-                     <h4>@Model.ElementAt(contador).Price Bs</h4>
-                </td>
-                @if((contador+1)<=total-1){
-                    <td width=200px>
-                        <h2>@Model.ElementAt(contador+1).Name</h2>
-                        @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+1).ImageUrl))
-                    {
-                        <img src="@Url.Content(@Model.ElementAt(contador+1).ImageUrl)"alt="Ima"style="width:200px;
-                        height:200px;max-width:50%" />
-                    }
-                     <h4>@Model.ElementAt(contador+1).Price Bs</h4>
-                    </td>
+<table class="table">
+    <tbody>
+       @for (; contador <total;contador++) 
+ {  
+     @if((contador%4)==0)
+    { <tr>
+         <td width=200px>
+           <h2>@Model.ElementAt(contador).Name</h2>
+             @if (!string.IsNullOrEmpty(@Model.ElementAt(contador).ImageUrl))
+               {
+ 
+                <img src="@Url.Content(@Model.ElementAt(contador).ImageUrl)"alt="Ima"style="width:200px;
+                 height:200px;max-width:50%"/>
                 }
-                @if((contador+2)<=total-1){
+                <h4>@Model.ElementAt(contador).Price Bs</h4>
+                 <div class="form-group">
+               <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                </td>
+
+                @if((contador+1)<=total-1)
+                {
+                <td width=200px>
+                    <h2>@Model.ElementAt(contador+1).Name</h2>
+                  @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+1).ImageUrl))
+                {
+                 <img src="@Url.Content(@Model.ElementAt(contador+1).ImageUrl)"alt="Ima"style="width:200px;
+                    height:200px;max-width:50%" />
+                }
+                <h4>@Model.ElementAt(contador+1).Price Bs</h4>
+                 <div class="form-group">
+              <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador+1).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                </td>
+                }
+                @if((contador+2)<=total-1)
+                {
                  <td width=200px>
                    <h2>@Model.ElementAt(contador+2).Name</h2>
                    @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+2).ImageUrl))
@@ -100,40 +92,46 @@ int contfilas=0;
                         height:200px;max-width:50%" />
                     }
                      <h4>@Model.ElementAt(contador+2).Price Bs</h4>
-                </td>
+                 <div class="form-group">
+               <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador+2).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                  </td>
                 }
-            </tr>
-    } 
-}
-            
-            
-        
-           
-        </tbody>
-   
-</table>
-
-
-
-
-<!--
-<div class="row ">
-    
-   
-            <div class="item active">
-             @foreach (var m in Model)
-                    {<div class="col-4"> 
-                        <div class="item">
-                            <h2>@m.Name</h2>
-            @if (!string.IsNullOrEmpty(@m.ImageUrl))
+                @if((contador+3)<=total-1)
+                {
+                 <td width=200px>
+                   <h2>@Model.ElementAt(contador+3).Name</h2>
+                   @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+3).ImageUrl))
                     {
-            <img src="@Url.Content(m.ImageUrl)"alt="Ima"style="width:200px;
+                        <img src="@Url.Content(@Model.ElementAt(contador+3).ImageUrl)"alt="Ima"style="width:200px;
                         height:200px;max-width:50%" />
                     }
-                     <h4>@m.Price Bs</h4>
-                         <br>  
-</div>                 </div>
+                     <h4>@Model.ElementAt(contador+3).Price Bs</h4>
+                 <div class="form-group">
+               <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador+3).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                  </td>
+                }
+               @if((contador+4)<=total-1)
+                {
+                 <td width=200px>
+                   <h2>@Model.ElementAt(contador+4).Name</h2>
+                   @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+4).ImageUrl))
+                    {
+                        <img src="@Url.Content(@Model.ElementAt(contador+4).ImageUrl)"alt="Ima"style="width:200px;
+                        height:200px;max-width:50%" />
                     }
-               </div>
+                     <h4>@Model.ElementAt(contador+4).Price Bs</h4>
+                 <div class="form-group">
+              <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador+4).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                  </td>
+                }
+        
+           </tr> 
+    } 
    
--->
+ }
+        </tbody>  
+</table>
+
