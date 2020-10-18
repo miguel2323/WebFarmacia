@@ -61,22 +61,21 @@ namespace WebFarmacia.Web.Controllers
     [HttpPost]
 
     public async Task<IActionResult> Register(RegisterNewUserViewModel model)
-    {    
-        
-        if (this.ModelState.IsValid)
+    {   if (this.ModelState.IsValid)
+         {
+             var user=await this.userlHelper.GetUserByEmailAsync(model.Username);
+                if(user == null)
                 {
-                    var user=await this.userlHelper.GetUserByEmailAsync(model.Username);
-                    if(user == null)
-                    {
-                        user= new User
-                        {
-                      FirstName=model.FirstName,
-                      LasName=model.LastName,
-                      Email=model.Username,
-                      UserName=model.Username
-                     };
-                    var  result =await this.userlHelper.AddUserAsync(user,model.Password);
-                    if (result !=IdentityResult.Success)
+                 user= new User
+                {
+                  FirstName=model.FirstName,
+                  LasName=model.LastName,
+                  Email=model.Username,
+                  UserName=model.Username
+                };
+                   
+                 var  result =await this.userlHelper.AddUserAsync(user,model.Password);
+                if (result !=IdentityResult.Success)
                  {
                   this.ModelState.AddModelError(string.Empty,"the user couldn't be created ");
                   return this.View(model);  

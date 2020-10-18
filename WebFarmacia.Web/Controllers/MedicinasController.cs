@@ -1,15 +1,18 @@
 ﻿
 namespace WebFarmacia.Web.Controllers
-{
+{   using System;  
+    using System.IO; 
+    using System.Linq;
     using System.Threading.Tasks;
     using Data;
     using Data.Entities;
     using Helpers;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
-    using System.IO;
+    using Microsoft.AspNetCore.Authorization;
     using WebFarmacia.Web.Models;
-    using System.Linq;
+
+    [Authorize]
 
     public class MedicinasController:Controller
     {
