@@ -36,18 +36,17 @@
         </a>
     </div>
 </div>
-@{
-    var total=0;
+@{var total=0;
      foreach(var m in Model)
      {
          total=total+1;
      }
 
      int filas=total/3;
-  int contador=0;
-//int contfilas=0;
-};
-<table class="table">
+      int contador=0;
+    //int contfilas=0;
+}
+<table class="table" >
     <tbody>
        @for (; contador <total;contador++) 
  {  
@@ -58,8 +57,9 @@
              @if (!string.IsNullOrEmpty(@Model.ElementAt(contador).ImageUrl))
                {
  
-                <img src="@Url.Content(@Model.ElementAt(contador).ImageUrl)"alt="Ima"style="width:200px;
-                 height:200px;max-width:50%"/>
+                <img src="@Url.Content(@Model.ElementAt(contador).ImageUrl)"
+                alt="Ima"style="width:100px;
+                 height:100px;max-width:50%"/>
                 }
                 <h4>@Model.ElementAt(contador).Price Bs</h4>
                  <div class="form-group">
@@ -73,8 +73,9 @@
                     <h2>@Model.ElementAt(contador+1).Name</h2>
                   @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+1).ImageUrl))
                 {
-                 <img src="@Url.Content(@Model.ElementAt(contador+1).ImageUrl)"alt="Ima"style="width:200px;
-                    height:200px;max-width:50%" />
+                    <img src="@Url.Content(@Model.ElementAt(contador+1).ImageUrl)"
+                    alt="Ima"style="width:100px;
+                    height:100px;max-width:50%"/>
                 }
                 <h4>@Model.ElementAt(contador+1).Price Bs</h4>
                  <div class="form-group">
@@ -88,8 +89,9 @@
                    <h2>@Model.ElementAt(contador+2).Name</h2>
                    @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+2).ImageUrl))
                     {
-                        <img src="@Url.Content(@Model.ElementAt(contador+2).ImageUrl)"alt="Ima"style="width:200px;
-                        height:200px;max-width:50%" />
+                        <img src="@Url.Content(@Model.ElementAt(contador+2).ImageUrl)"
+                        alt="Ima"style="width:100px;
+                          height:100px;max-width:50%"/>
                     }
                      <h4>@Model.ElementAt(contador+2).Price Bs</h4>
                  <div class="form-group">
@@ -103,8 +105,9 @@
                    <h2>@Model.ElementAt(contador+3).Name</h2>
                    @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+3).ImageUrl))
                     {
-                        <img src="@Url.Content(@Model.ElementAt(contador+3).ImageUrl)"alt="Ima"style="width:200px;
-                        height:200px;max-width:50%" />
+                        <img src="@Url.Content(@Model.ElementAt(contador+3).ImageUrl)"
+                        alt="Ima"style="width:100px;
+                        height:100px;max-width:50%"/>
                     }
                      <h4>@Model.ElementAt(contador+3).Price Bs</h4>
                  <div class="form-group">
@@ -118,8 +121,9 @@
                    <h2>@Model.ElementAt(contador+4).Name</h2>
                    @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+4).ImageUrl))
                     {
-                        <img src="@Url.Content(@Model.ElementAt(contador+4).ImageUrl)"alt="Ima"style="width:200px;
-                        height:200px;max-width:50%" />
+                        <img src="@Url.Content(@Model.ElementAt(contador+4).ImageUrl)"
+                        alt="Ima"style="width:100px;
+                        height:100px;max-width:50%"/>
                     }
                      <h4>@Model.ElementAt(contador+4).Price Bs</h4>
                  <div class="form-group">

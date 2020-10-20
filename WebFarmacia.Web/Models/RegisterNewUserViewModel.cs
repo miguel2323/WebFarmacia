@@ -11,8 +11,6 @@ public class RegisterNewUserViewModel
     [Display(Name="First name")]
     public string FirstName{get;set;}
 
-
-
     [Required]
     [Display(Name="last name")]
     public string LastName{get;set;}
@@ -21,8 +19,6 @@ public class RegisterNewUserViewModel
     [Required]
     [DataType(DataType.EmailAddress)]
     public string Username{get;set;}
-
-
 
     [Required]
    [MaxLength(6)]

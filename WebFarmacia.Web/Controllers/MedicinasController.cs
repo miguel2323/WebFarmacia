@@ -151,7 +151,7 @@ namespace WebFarmacia.Web.Controllers
                     var product = this.ToProduct(view, path);
                    product.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                    await this.productRepository.UpdateAsync(product);
-                   //await this.productRepository.SaveAllAsync();
+                  
                  } catch (DbUpdateConcurrencyException)
                 {
                     if (!await this.productRepository.ExistAsync(view.Id))
