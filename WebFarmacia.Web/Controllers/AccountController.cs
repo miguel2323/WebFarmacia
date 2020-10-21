@@ -9,8 +9,10 @@ namespace WebFarmacia.Web.Controllers
         using WebFarmacia.Web.Models;
         using Microsoft.AspNetCore.Identity;
         using WebFarmacia.Web.Data.Entities;
-        public class AccountController: Controller
-        {
+        //using Farma.Web.Models;
+
+    public class AccountController: Controller
+    {
 
             private readonly IUserHelper userlHelper;
             
@@ -114,9 +116,9 @@ namespace WebFarmacia.Web.Controllers
                 return this.View(model);
              } 
 
-       [HttpPost]
-     public async Task<IActionResult> ChangeUser(ChangeUserViewModel model)
-        {
+           [HttpPost]
+           public async Task<IActionResult> ChangeUser(ChangeUserViewModel model)
+           {
             if (this.ModelState.IsValid)
             {                         
                 var user = await this.userlHelper.GetUserByEmailAsync(this.User.Identity.Name);
@@ -155,6 +157,38 @@ namespace WebFarmacia.Web.Controllers
 
             return this.View(model);
         }
+
+           public IActionResult ChangePassword()
+            {
+                
+            return this.View();
+
+             }
+                [HttpPost]
+                public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+                {
+                if (this.ModelState.IsValid)
+                {
+                    var user= await this.userlHelper.GetUserByEmailAsync(this.User.Identity.Name);
+                    if (user !=null)
+                    {
+                        var result= await this.userlHelper.ChangePasswordAsync(user, model.OldPassword,model.NewPassword);
+                        if (result.Succeeded)
+                        {
+                            return this.RedirectToAction("ChangeUser");
+                        }
+                        else
+                        {
+                            this.ModelState.AddModelError(string.Empty, result.Errors.FirstOrDefault().Description);
+                        }
+                    }
+                    else
+                    {
+                        this.ModelState.AddModelError(string.Empty,"User no found");
+                    }
+                    }
+                    return this.View(model);
+                }
 
 
 

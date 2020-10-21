@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Farma.Web.Models
+namespace WebFarmacia.Web.Models
 {
     using System.ComponentModel.DataAnnotations;
 
