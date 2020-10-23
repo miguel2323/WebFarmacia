@@ -33,6 +33,10 @@ namespace WebFarmacia.Web.Data
         {
             // verificando que la base de datos este creada
             await this.context.Database.EnsureCreatedAsync();
+            /*Crando los roles de usuarios */
+            await this.userHelper.checkRoleAsync("Admin");
+            await this.userHelper.checkRoleAsync("customer");
+
 
             //Creando el usuario
 
@@ -53,8 +57,16 @@ namespace WebFarmacia.Web.Data
                 {
                     throw new InvalidOperationException("Could not create the user in seeder");
                 }
+                await this.userHelper.AddUserToRoleAsync(user,"Admin");
 
             }
+         var isInRole= await this.userHelper.IsUserInRoleAsync(user,"Admin");
+          if(!isInRole)
+         {
+             await this.userHelper.AddUserToRoleAsync(user,"Admin");
+         }
+
+
         
             if (!this.context.Medicinas.Any())
             {

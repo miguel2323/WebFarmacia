@@ -12,7 +12,7 @@ namespace WebFarmacia.Web.Controllers
     using Microsoft.AspNetCore.Authorization;
     using WebFarmacia.Web.Models;
 
-    [Authorize]
+    
 
     public class MedicinasController:Controller
     {
@@ -27,6 +27,7 @@ namespace WebFarmacia.Web.Controllers
         }                                                                                          
 
         // GET: Medicinas
+       
          public IActionResult Index()
         {
             return View(this.productRepository.GetAll().OrderBy(p=>p.Name.ToUpper()));
@@ -45,7 +46,8 @@ namespace WebFarmacia.Web.Controllers
          }
 
         // GET: Medicinas/Create
-        public IActionResult Create()
+        [Authorize(Roles="Admin")]
+                public IActionResult Create()
         {
             return View();
         }
@@ -95,6 +97,7 @@ namespace WebFarmacia.Web.Controllers
               };
         }
     // GET: Medicinas/Edit/5
+    [Authorize(Roles="Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -183,6 +186,7 @@ namespace WebFarmacia.Web.Controllers
         }
 
         // POST: Medicinas/Delete/5
+        [Authorize(Roles="Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
