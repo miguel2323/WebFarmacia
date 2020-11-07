@@ -26,11 +26,18 @@ namespace WebFarmacia.Web.Controllers.API
         }
 
         [HttpGet]
-
+   
+        [HttpGet]
          public IActionResult GetProducts()
          {
              return Ok(this.productRepository.GetAllWithUsers());
          } 
+
+      /*     
+           public IActionResult GetProductsID()
+        {
+            return Ok(this.productRepository.GetAllWithUsers(p=>p.Id));
+        }*/
     }
 
    

@@ -63,15 +63,17 @@ namespace WebFarmacia.Web.Controllers
 
                 if(view.ImageFile !=null &&view.ImageFile.Length>0)
                 {
+                    var guid=Guid.NewGuid().ToString();
+                    var file =$"{guid}.jpg";
+
                  path = Path.Combine(
                  Directory.GetCurrentDirectory(), 
-                "wwwroot//ima//Product",
-                view.ImageFile.FileName);
+                "wwwroot//ima//Product",file);
                     using(var stream=new FileStream(path,FileMode.Create))
                         {
                         await view.ImageFile.CopyToAsync(stream);
                         }
-                        path = $"~/ima/Product/{view.ImageFile.FileName}";
+                        path = $"~/ima/Product/{file}";
                 }
                 var product = this.ToProduct(view, path);
                 product.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
@@ -141,16 +143,17 @@ namespace WebFarmacia.Web.Controllers
                 {
                  var path = view.ImageUrl;
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
-                    {
-                         path = Path.Combine(
-                            Directory.GetCurrentDirectory(),
-                            "wwwroot//ima//Product",
-                            view.ImageFile.FileName);
-                        using (var stream = new FileStream(path, FileMode.Create))
+                    { var guid=Guid.NewGuid().ToString();
+                    var file =$"{guid}.jpg";
+
+                 path = Path.Combine(
+                 Directory.GetCurrentDirectory(), 
+                "wwwroot//ima//Product",file);
+                    using(var stream=new FileStream(path,FileMode.Create))
                         {
-                         await view.ImageFile.CopyToAsync(stream);
+                        await view.ImageFile.CopyToAsync(stream);
                         }
-                        path = $"~/ima/Product/{view.ImageFile.FileName}";
+                        path = $"~/ima/Product/{file}";
                     }
                     var product = this.ToProduct(view, path);
                    product.User=await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
