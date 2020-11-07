@@ -33,7 +33,17 @@ namespace WebFarmacia.Web.Data.Entities
       public User User { get; set; }
 
        [Display(Name ="Imagen")]
-        public string ImageFullPath { get;}
+        public string ImageFullPath 
+        { 
+            get{
+                if (string.IsNullOrEmpty(this.ImageUrl))
+                {
+                 return null;                    
+                }
+                return $"https://localhost:5001/api/Medicinas{this.ImageUrl.Substring(1)}";
+            }
+        
+        }
 
     }
 }
