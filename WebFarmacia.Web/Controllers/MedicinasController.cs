@@ -11,7 +11,7 @@ namespace WebFarmacia.Web.Controllers
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Authorization;
     using WebFarmacia.Web.Models;
-
+    
     
 
     public class MedicinasController:Controller
@@ -54,8 +54,8 @@ namespace WebFarmacia.Web.Controllers
 
         // POST: Medicinas/Create.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MadicinaViewModel view)
+       [ValidateAntiForgeryToken]
+               public async Task<IActionResult> Create(MadicinaViewModel view)
         {
             if (ModelState.IsValid)
             {
@@ -132,6 +132,7 @@ namespace WebFarmacia.Web.Controllers
         // POST: Medicinas/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task< IActionResult> Edit(MadicinaViewModel view)
         {
             if (ModelState.IsValid)
@@ -170,6 +171,7 @@ namespace WebFarmacia.Web.Controllers
             return View(view);
         }
          // GET: Medicinas/Delete/5
+         [Authorize(Roles="Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

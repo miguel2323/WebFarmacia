@@ -7,7 +7,10 @@
     
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /> 
-     <!--   <link rel="stylesheet" href="~/css/site.css" />--> 
+        <link href="~/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+       <link rel="stylesheet" href="~/css/site.css"/>-->
+       <link href="~/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" 
+       rel="stylesheet" />
     </environment>
 
     <environment exclude="Development">
@@ -83,6 +86,6 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false);
 </body>
 </html>

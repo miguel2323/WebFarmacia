@@ -10,7 +10,7 @@ namespace WebFarmacia.Web.Controllers
         using Microsoft.AspNetCore.Identity;
         using WebFarmacia.Web.Data.Entities;
         //using Farma.Web.Models;
-
+    
     public class AccountController: Controller
     {
 
