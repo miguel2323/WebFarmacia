@@ -1,7 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<WebFarmacia.Web.Data.Entities.Medicina>
 
+@{ ViewData["Title"] = "Home Page";
+}
+<!-- <link href="/css/site.min.css" rel="stylesheet" />   -->
+
+<link href="stylesheet" type="text/css" media="screen" rel="/css/site.css" />
+<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+<!--colacando el carrusel-->
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -10,85 +15,127 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
+            <img src="ima/unnamed 1.jpg" alt="ASP.NET" class="img-responsive" />
         </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
+        <div class="item">
+            <img src="ima/unnamed 2.jpg" alt="Visual Studio" class="img-responsive" />
+        </div>
+
+        <div class="item">
+            <img src="ima/unnamed 3.jpg" alt="Microsoft Azure" class="img-responsive" />
+        </div>
+
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </div>
+@{var total=0;
+     foreach(var m in Model)
+     {
+         total=total+1;
+     }
+
+     int filas=total/3;
+      int contador=0;
+    //int contfilas=0;
+}
+<table class="table" >
+    <tbody>
+       @for (; contador <total;contador++) 
+ {  
+     @if((contador%4)==0)
+    { <tr>
+         <td width=200px>
+           <h2>@Model.ElementAt(contador).Name</h2>
+             @if (!string.IsNullOrEmpty(@Model.ElementAt(contador).ImageUrl))
+               {
+ 
+                <img src="@Url.Content(@Model.ElementAt(contador).ImageUrl)"
+                alt="Ima"style="width:100px;
+                 height:100px;max-width:50%"/>
+                }
+                <h4>@Model.ElementAt(contador).Price Bs</h4>
+                 <div class="form-group">
+               <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                </td>
+
+                @if((contador+1)<=total-1)
+                {
+                <td width=200px>
+                    <h2>@Model.ElementAt(contador+1).Name</h2>
+                  @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+1).ImageUrl))
+                {
+                    <img src="@Url.Content(@Model.ElementAt(contador+1).ImageUrl)"
+                    alt="Ima"style="width:100px;
+                    height:100px;max-width:50%"/>
+                }
+                <h4>@Model.ElementAt(contador+1).Price Bs</h4>
+                 <div class="form-group">
+              <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador+1).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                </td>
+                }
+                @if((contador+2)<=total-1)
+                {
+                 <td width=200px>
+                   <h2>@Model.ElementAt(contador+2).Name</h2>
+                   @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+2).ImageUrl))
+                    {
+                        <img src="@Url.Content(@Model.ElementAt(contador+2).ImageUrl)"
+                        alt="Ima"style="width:100px;
+                          height:100px;max-width:50%"/>
+                    }
+                     <h4>@Model.ElementAt(contador+2).Price Bs</h4>
+                 <div class="form-group">
+               <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador+2).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                  </td>
+                }
+                @if((contador+3)<=total-1)
+                {
+                 <td width=200px>
+                   <h2>@Model.ElementAt(contador+3).Name</h2>
+                   @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+3).ImageUrl))
+                    {
+                        <img src="@Url.Content(@Model.ElementAt(contador+3).ImageUrl)"
+                        alt="Ima"style="width:100px;
+                        height:100px;max-width:50%"/>
+                    }
+                     <h4>@Model.ElementAt(contador+3).Price Bs</h4>
+                 <div class="form-group">
+               <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador+3).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                  </td>
+                }
+               @if((contador+4)<=total-1)
+                {
+                 <td width=200px>
+                   <h2>@Model.ElementAt(contador+4).Name</h2>
+                   @if (!string.IsNullOrEmpty(@Model.ElementAt(contador+4).ImageUrl))
+                    {
+                        <img src="@Url.Content(@Model.ElementAt(contador+4).ImageUrl)"
+                        alt="Ima"style="width:100px;
+                        height:100px;max-width:50%"/>
+                    }
+                     <h4>@Model.ElementAt(contador+4).Price Bs</h4>
+                 <div class="form-group">
+              <a asp-controller="Medicinas" asp-action="Details" asp-route-id="@Model.ElementAt(contador+4).Id" class="btn btn-primary">Detail</a> 
+              </div>
+                  </td>
+                }
+        
+           </tr> 
+    } 
+   
+ }
+        </tbody>  
+</table>
+

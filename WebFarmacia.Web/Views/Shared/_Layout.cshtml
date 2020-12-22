@@ -3,12 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebFarmacia.Web</title>
-
+    <title>@ViewData["Title"]-WebFarmacia.Web</title>
+    
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /> 
+        <link href="~/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+       <link rel="stylesheet" href="~/css/site.css"/>-->
+       <link href="~/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" 
+       rel="stylesheet" />
     </environment>
+
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -33,18 +37,31 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Medicinas" asp-action="Index">Medicina</a></li>
                 </ul>
+             <ul class="nav navbar-nav navbar-right">
+                   @if (this.User.Identity.IsAuthenticated)
+                   {
+                    <li><a asp-area="" asp-controller="Account" asp-action="ChangeUser">@this.User.Identity.Name</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                       
+                   }
+                   else{
+                       <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
+                       
+                   }
+             </ul>
+
             </div>
         </div>
     </nav>
-
-    <partial name="_CookieConsentPartial" />
+ <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - WebFarmacia.Web</p>
+            <p>&copy; 2019 -WebFarmacia.Web</p>
         </footer>
     </div>
 
@@ -69,6 +86,6 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false);
 </body>
 </html>
